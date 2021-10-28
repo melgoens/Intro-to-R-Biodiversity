@@ -135,3 +135,4 @@ mapPlot(coastlineWorld, projection="+proj=moll", grid=FALSE, col="lightgray")
 mapImage(lon, lat, z, colormap=cm)
 
 #End of Assignment 1
+#Melanie Goens October 28 2021
