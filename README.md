@@ -133,3 +133,5 @@ cm <- colormap(name="gmt_globe")
 drawPalette(colormap=cm)
 mapPlot(coastlineWorld, projection="+proj=moll", grid=FALSE, col="lightgray")
 mapImage(lon, lat, z, colormap=cm)
+
+#End of Assignment 1
