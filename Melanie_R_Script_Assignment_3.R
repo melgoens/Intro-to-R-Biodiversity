@@ -30,11 +30,14 @@ class(Country_Data)
 #It is not (in both the original and edited versions)
 Country_Data<-as.character(Country_Data)
 
-North_American_Countries_Template<-read_table("https://www.newworldencyclopedia.org/entry/list_of_countries_by_continent#NorthAmerica")
+#Viewing the countries to create manual input of continents.
+names
 
-North_American_Countries<-c(FALSE,TRUE,FALSE,FALSE)
-sum(North_American_Countries) #True=1, False=0 - So the sum of 1 would make sense here
-unique(North_American_Countries) #Making sure I didn't spell anything wrong - we can also see this by taking the sum
+#Creating continent vector (The following line relied on manual input.)
+continents<-c("North_America", "Oceania", "North_America", "Europe", "Asia", "Europe", "Asia", "Asia", NA, "Asia", "North_America", "Asia", "Oceania", "Africa", "Asia", "Europe", "Europe", "Europe_Asia", "Oceania")
+  
+#Matching countries and continents
+Countries_by_Continent<-data.frame(names,)
 
 Collection_Sites<-as.data.frame(cbind(Country_Data,North_American_Countries))
 View(Collection_Sites)
@@ -63,12 +66,12 @@ is.na(dfCoccinellidae)
 ###Diversity Question 1:BIN based Question ----
 dfCoccinellidae$bin_uri
 
-dfCount.by.BIN <- dfCoccinellidae %>%
+dfCount.by.BIN<-dfCoccinellidae %>%
   group_by(bin_uri) %>%
   count(bin_uri)
 dfCount.by.BIN
 
-dfCount.by.Country <- dfCoccinellidae %>%
+dfCount.by.Country<-dfCoccinellidae %>%
   group_by(country) %>%
   count(country)
 dfCount.by.Country
