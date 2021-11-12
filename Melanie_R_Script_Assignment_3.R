@@ -10,7 +10,15 @@ library(tidyverse)
 library(vegan)
 
 #Loading the Data----
+
+#Obtaining data first time around (comment out if it's not the first time running the script)
 dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
+
+#Exporting data to file. (Allows us to take breaks while writing code)
+write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
+
+#Code for data, if a break is taken (uncomment to use)
+#dfCoccinellidae<-read.csv("dfCoccinellidae.csv")
 
 #Exploring the Data----
 
@@ -34,7 +42,7 @@ Country_Data<-as.character(Country_Data)
 names
 
 #Creating continent vector (The following line relied on manual input.)
-continents<-c("North_America", "Oceania", "North_America", "Europe", "Asia", "Europe", "Asia", "Asia", NA, "Asia", "North_America", "Asia", "Oceania", "Africa", "Asia", "Europe", "Europe", "Europe_Asia", "Oceania")
+continents<-c("North_America", "Oceania", "North_America", "Europe", "Asia", "Europe", "Asia", "Asia", NA, "Asia", "North_America", "Asia", "Oceania", "Africa", "Asia", "Europe", "Europe", "Europe_Asia", "Oceania", "Asia", "Africa", "")
   
 #Matching countries and continents
 Countries_by_Continent<-data.frame(names,)
