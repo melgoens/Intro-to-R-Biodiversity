@@ -14,11 +14,8 @@ library(vegan)
 #Obtaining data first time around (comment out if it's not the first time running the script)
 dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
 
-#Exporting data to file. (Allows us to take breaks while writing code)
+#Exporting data to file. (For reproducibility and )
 write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
-
-#Code for data, if a break is taken (uncomment to use)
-#dfCoccinellidae<-read.csv("dfCoccinellidae.csv")
 
 #Exploring the Data----
 
@@ -39,10 +36,24 @@ class(Country_Data)
 Country_Data<-as.character(Country_Data)
 
 #Viewing the countries to create manual input of continents.
-names
+print(names)
 
-#Creating continent vector (The following line relied on manual input.)
-continents<-c("North_America", "Oceania", "North_America", "Europe", "Asia", "Europe", "Asia", "Asia", NA, "Asia", "North_America", "Asia", "Oceania", "Africa", "Asia", "Europe", "Europe", "Europe_Asia", "Oceania", "Asia", "Africa", "")
+#Creating continent vector
+continents<-c()
+for(i in 1:nrow(Country_Data)){
+  if(Country_Data$country[i] == ("Canada" | "United States" | "Greenland")){
+    continents<-c(continents, "North America")
+  }
+  if(Country_Data$country[i] == ("Germany" | "Spain" | "Findland" | "Italy" | "Norway" | "United Kingdom")){
+    continents<-c(continents, "Europe")
+  }
+  if(Country_Data$country[i] == ("Malaysia" | "Russia" | "Bangladesh" | "Pakistan" | "Indonesia" | "India" | "Japan" | "Thailand" | "China" | "Philipines")){
+    continents<-c(continents, "Asia")
+  }
+  if(is.na(Country_Data)){
+    
+  }
+}
   
 #Matching countries and continents
 Countries_by_Continent<-data.frame(names,)
