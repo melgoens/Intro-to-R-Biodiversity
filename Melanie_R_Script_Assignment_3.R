@@ -41,17 +41,39 @@ print(names)
 #Creating continent vector
 continents<-c()
 for(i in 1:nrow(Country_Data)){
-  if(Country_Data$country[i] == ("Canada" | "United States" | "Greenland")){
+  value_check<-0
+  if(Country_Data$country[i] == ("Canada" | "United States" | "Greenland" | "Costa Rica" | "Mexico" | "Guatemala" | "Honduras" | "Panama" | "Puerto Rico")){
     continents<-c(continents, "North America")
+    value_check<-1
   }
-  if(Country_Data$country[i] == ("Germany" | "Spain" | "Findland" | "Italy" | "Norway" | "United Kingdom")){
+  if(Country_Data$country[i] == ("Germany" | "Spain" | "Findland" | "Italy" | "Norway" | "United Kingdom" | "Poland" | "Portugal" | "Moldova" | "Greece" | "Czech Republic" | "Sweden" | "Switzerland" | "Bulgaria" | "France" | "Belgium" | "Netherlands" | "Belarus" | "Slovakia" | "Ukraine" | "Estonia" | "Austria" | "Slovenia")){
     continents<-c(continents, "Europe")
+    value_check<-1
   }
-  if(Country_Data$country[i] == ("Malaysia" | "Russia" | "Bangladesh" | "Pakistan" | "Indonesia" | "India" | "Japan" | "Thailand" | "China" | "Philipines")){
+  if(Country_Data$country[i] == ("Malaysia" | "Russia" | "Bangladesh" | "Pakistan" | "Indonesia" | "India" | "Japan" | "Thailand" | "China" | "Philipines" | "Saudi Arabia" | "Vietnam" | "Israel" | "Oman" | "Iran" | "Taiwan" | "Syria" | "Uzbekistan" | "Laos" | "Turkey" | "Sri Lanka" | "Armenia" | "Myanmar" | "South Korea")){
     continents<-c(continents, "Asia")
+    value_check<-1
+  }
+  if(Country_Data$country[i] == ("Australia" | "French Polynesia" | "Papua New Guinea" | "New Zealand" | "West Papua" | "New Caledonia" | "Solomon Islands")){
+    continents<-c(continents, "Oceania")
+    value_check<-1
+  }
+  if(Country_Data$country[i] == ("Venezuela" | "Argentina" | "Ecuador" | "Brazil" | "Bolivia" | "Chile")){
+    continents<-c(continents, "South America")
+    value_check<-1
+  }
+  if(Country_Data$country[i] == ("South Africa" | "Gabon" | "Madagascar" | "Egypt" | "Zambia" | "Kenya" | "Cameroon" | "Ethiopia" | "Uganda" | "Tanzania" | "Rwanda" | "Senegal")){
+    continents<-c(continents, "Africa")
+    value_check<-1
   }
   if(is.na(Country_Data)){
-    
+    continents<-c(continents, NA)
+    value_check<-1
+  }
+  if(value_check == 0){
+    print(sprintf("Continent of %s not found", Country_Data$country[i]))
+    manual_input<-readline(prompt = "Please enter continent manually:")
+    continents<-c(continents, manual_input)
   }
 }
   
