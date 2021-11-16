@@ -35,50 +35,77 @@ class(Country_Data)
 #It is not (in both the original and edited versions)
 Country_Data<-as.character(Country_Data)
 
-#Viewing the countries to create manual input of continents.
+#Viewing the countries to create manual input of countries by continents.
 print(names)
+
+#Creating a vector for each continent
+North_America<-c("Canada", "United States", "Greenland", "Costa Rica", "Mexico", "Guatemala", "Honduras", "Panama", "Puerto Rico")
+
+Europe<-c("Germany", "Spain", "Findland", "Italy", "Norway", "United Kingdom", "Poland", "Portugal", "Moldova", "Greece", "Czech Republic", "Sweden", "Switzerland", "Bulgaria", "France", "Belgium", "Netherlands", "Belarus", "Slovakia", "Ukraine", "Estonia", "Austria", "Slovenia")
+
+Asia<-c("Malaysia", "Russia", "Bangladesh", "Pakistan", "Indonesia", "India", "Japan", "Thailand", "China", "Philipines", "Saudi Arabia", "Vietnam", "Israel", "Oman", "Iran", "Taiwan", "Syria", "Uzbekistan", "Laos", "Turkey", "Sri Lanka", "Armenia", "Myanmar", "South Korea")
+
+South_America<-c("Venezuela", "Argentina", "Ecuador", "Brazil", "Bolivia", "Chile")
+
+Oceania<-c("Australia", "French Polynesia", "Papua New Guinea", "New Zealand", "West Papua", "New Caledonia", "Solomon Islands")
+
+Afirca<-c("South Africa", "Gabon", "Madagascar", "Egypt", "Zambia", "Kenya", "Cameroon", "Ethiopia", "Uganda", "Tanzania", "Rwanda", "Senegal")
 
 #Creating continent vector
 continents<-c()
-for(i in 1:nrow(Country_Data)){
+for(i in 1:nrow(dfCoccinellidae)){
   value_check<-0
-  if(Country_Data$country[i] == ("Canada" | "United States" | "Greenland" | "Costa Rica" | "Mexico" | "Guatemala" | "Honduras" | "Panama" | "Puerto Rico")){
-    continents<-c(continents, "North America")
-    value_check<-1
+  if(is.na(dfCoccinellidae$country) == FALSE){
+    for(j in 1:len(North_America)){
+      if(dfCoccinellidae$country[i] == North_America[j]){
+        continents<-c(continents, "North America")
+        value_check<-1
+      }
+    }
+    for(j in 1:len(Europe)){
+      if(dfCoccinellidae$country[i] == Europe[j]){
+        continents<-c(continents, "Europe")
+        value_check<-1
+      }
+    }
+    for(j in 1:len(Asia)){
+      if(dfCoccinellidae$country[i] == Asia[j]){
+        continents<-c(continents, "Asia")
+        value_check<-1
+      }
+    }
+    for(j in 1:len(South_America)){
+      if(dfCoccinellidae$country[i] == South_America[j]){
+        continents<-c(continents, "South America")
+        value_check<-1
+      }
+    }
+    for(j in 1:len(Oceania)){
+      if(dfCoccinellidae$country[i] == Oceania[j]){
+        continents<-c(continents, "Oceania")
+        value_check<-1
+      }
+    }
+    for(j in 1:len(Africa)){
+      if(dfCoccinellidae$country[i] == Africa[j]){
+        continents<-c(continents, "Africa")
+        value_check<-1
+      }
+    }
   }
-  if(Country_Data$country[i] == ("Germany" | "Spain" | "Findland" | "Italy" | "Norway" | "United Kingdom" | "Poland" | "Portugal" | "Moldova" | "Greece" | "Czech Republic" | "Sweden" | "Switzerland" | "Bulgaria" | "France" | "Belgium" | "Netherlands" | "Belarus" | "Slovakia" | "Ukraine" | "Estonia" | "Austria" | "Slovenia")){
-    continents<-c(continents, "Europe")
-    value_check<-1
-  }
-  if(Country_Data$country[i] == ("Malaysia" | "Russia" | "Bangladesh" | "Pakistan" | "Indonesia" | "India" | "Japan" | "Thailand" | "China" | "Philipines" | "Saudi Arabia" | "Vietnam" | "Israel" | "Oman" | "Iran" | "Taiwan" | "Syria" | "Uzbekistan" | "Laos" | "Turkey" | "Sri Lanka" | "Armenia" | "Myanmar" | "South Korea")){
-    continents<-c(continents, "Asia")
-    value_check<-1
-  }
-  if(Country_Data$country[i] == ("Australia" | "French Polynesia" | "Papua New Guinea" | "New Zealand" | "West Papua" | "New Caledonia" | "Solomon Islands")){
-    continents<-c(continents, "Oceania")
-    value_check<-1
-  }
-  if(Country_Data$country[i] == ("Venezuela" | "Argentina" | "Ecuador" | "Brazil" | "Bolivia" | "Chile")){
-    continents<-c(continents, "South America")
-    value_check<-1
-  }
-  if(Country_Data$country[i] == ("South Africa" | "Gabon" | "Madagascar" | "Egypt" | "Zambia" | "Kenya" | "Cameroon" | "Ethiopia" | "Uganda" | "Tanzania" | "Rwanda" | "Senegal")){
-    continents<-c(continents, "Africa")
-    value_check<-1
-  }
-  if(is.na(Country_Data)){
+
+
+  if(is.na(dfCoccinellidae$country[i])){
     continents<-c(continents, NA)
     value_check<-1
   }
+  #Provides leeway for changes in the data
   if(value_check == 0){
-    print(sprintf("Continent of %s not found", Country_Data$country[i]))
+    print(sprintf("Continent of %s not found", dfCoccinellidae$country[i]))
     manual_input<-readline(prompt = "Please enter continent manually:")
     continents<-c(continents, manual_input)
   }
 }
-  
-#Matching countries and continents
-Countries_by_Continent<-data.frame(names,)
 
 Collection_Sites<-as.data.frame(cbind(Country_Data,North_American_Countries))
 View(Collection_Sites)
