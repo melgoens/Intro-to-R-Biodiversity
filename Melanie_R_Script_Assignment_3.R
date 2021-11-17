@@ -101,6 +101,9 @@ for(i in 1:nrow(dfCoccinellidae)){
   }
 }
 
+View(continents)
+View(dfCoccinellidae$country)
+
 ###Diversity Question 1:BIN based Question ----
 dfCoccinellidae$bin_uri
 
@@ -154,6 +157,7 @@ maps::map(database= "world", ylim=c(45,90), xlim=c(-160,-50), col="grey80", fill
 coord <- mapproject(dfCoccinellidae$lon, dfCoccinellidae$lat, proj="gilbert", orientation=c(90, 0, 225))  #convert points to projected lat/long
 points(coord, pch=20, cex=1.2, col="red")  #plot converted points
 
+#world map
 maps::map(database= "world", col="grey80", fill=TRUE, projection="gilbert")
 coord <- mapproject(dfCoccinellidae$lon, dfCoccinellidae$lat, proj="gilbert")  #convert points to projected lat/long
 points(coord, pch=20, cex=1.2, col="red")  #plot converted points
