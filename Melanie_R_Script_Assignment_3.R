@@ -12,10 +12,10 @@ library(vegan)
 #Loading the Data----
 
 #Obtaining data
-#dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
+dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
 
 #Exporting data to file. (For reproducibility and )
-#write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
+write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
 
 #Exploring the Data----
 
