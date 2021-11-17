@@ -12,12 +12,18 @@ library(vegan)
 #Loading the Data----
 
 #Obtaining data
-dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
+#dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
 
 #Exporting data to file. (For reproducibility and )
-write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
+#write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
 
 #Exploring the Data----
+
+dfCoccinellidae
+summary(dfCoccinellidae)
+dim(dfCoccinellidae)
+class(dfCoccinellidae)
+is.na(dfCoccinellidae)
 
 #From what countries do majority of the data come from?
 names<-unique(dfCoccinellidae$country)
@@ -95,22 +101,6 @@ for(i in 1:nrow(dfCoccinellidae)){
   }
 }
 
-Collection_Sites<-as.data.frame(cbind(Country_Data,North_American_Countries))
-View(Collection_Sites)
-str(Collection_Sites)
-summary(Countries)
-
-#Sample size of my data only
-Total_Specimen_Records<-29558
-my_data<-sum(Country_Data)/Total_Specimen_Records*100
-my_data
-
-dfCoccinellidae
-summary(dfCoccinellidae)
-dim(dfCoccinellidae)
-class(dfCoccinellidae)
-is.na(dfCoccinellidae)
-
 ###Diversity Question 1:BIN based Question ----
 dfCoccinellidae$bin_uri
 
@@ -119,25 +109,25 @@ dfCount_by_BIN<-dfCoccinellidae %>%
   count(bin_uri)
 dfCount_by_BIN
 
-dfCount.by.Country<-dfCoccinellidae %>%
+dfCount_by_Country<-dfCoccinellidae %>%
   group_by(country) %>%
   count(country)
-dfCount.by.Country
+dfCount_by_Country
 
-view(dfCount.by.BIN)
+view(dfCount_by_BIN)
 
-names(dfCount.by.BIN) <- c("BINs", "Frequency")
-dfCount.by.BIN
+names(dfCount_by_BIN)<-c("BINs", "Frequency")
+dfCount_by_BIN
 
 #removing NAs
-dfCount.by.BIN2 <-na.omit(dfCount.by.BIN)
-dfCount.by.BIN2
+dfCount_by_BIN2<-na.omit(dfCount_by_BIN)
+dfCount_by_BIN2
 
 #my x axis
-col1.dfCount.by.BIN2 <- dfCount.by.BIN2[ , 1]
-col1.dfCount.by.BIN2
-dim(col1.dfCount.by.BIN2)
-class(col1.dfCount.by.BIN2)
+col1_dfCount_by_BIN2<-dfCount_by_BIN2[ , 1]
+col1_dfCount_by_BIN2
+dim(col1_dfCount_by_BIN2)
+class(col1_dfCount_by_BIN2)
 
 #my y axis
 dfCoccinellidae$country
@@ -152,9 +142,9 @@ Countries<-table(dfCoccinellidae$country)
 
 table(dfCoccinellidae$habitat)
 
-table(dfCoccinellidae$lon) #trying to sort data based on longitude
-sorted.dfCoccinellidae.lat<-sort(dfCoccinellidae$lat)
-ZerotoThirty<-sorted.dfCoccinellidae.lat[0:30]#I'm accidentally pulling out the first 30 elements as opposed to the values that are 0 to 30
+table(dfCoccinellidae$lon)
+sorted_dfCoccinellidae_lat<-sort(dfCoccinellidae$lat)
+ZerotoThirty<-sorted_dfCoccinellidae_lat[sorted_dfCoccinellidae_lat > 0 & sorted_dfCoccinellidae_lat < 30]
 ZerotoThirty
 
 ###Maps----
@@ -164,18 +154,9 @@ maps::map(database= "world", ylim=c(45,90), xlim=c(-160,-50), col="grey80", fill
 coord <- mapproject(dfCoccinellidae$lon, dfCoccinellidae$lat, proj="gilbert", orientation=c(90, 0, 225))  #convert points to projected lat/long
 points(coord, pch=20, cex=1.2, col="red")  #plot converted points
 
-#whole world no coordinates
-data(coastlineWorld)
-par(mar=c(1.5, 1, 1.5, 1))
-data(topoWorld)
-topo <- decimate(topoWorld, 2) # coarsen grid: 4X faster plot
-lon <- dfCoccinellidae$lon
-lat <- dfCoccinellidae$lat
-z <- topo[["z"]]
-cm <- colormap(name="gmt_globe")
-drawPalette(colormap=cm)
-mapPlot(coastlineWorld, projection="+proj=moll", grid=FALSE, col="lightgray")
-mapImage(lon, lat, z, colormap=cm)
+maps::map(database= "world", col="grey80", fill=TRUE, projection="gilbert")
+coord <- mapproject(dfCoccinellidae$lon, dfCoccinellidae$lat, proj="gilbert")  #convert points to projected lat/long
+points(coord, pch=20, cex=1.2, col="red")  #plot converted points
 
 #End of Assignment 1
 #Melanie Goens October 28 2021
