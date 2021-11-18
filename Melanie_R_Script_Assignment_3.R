@@ -12,7 +12,7 @@ library(vegan)
 #Loading the Data----
 
 #Obtaining data
-#dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
+dfCoccinellidae<-read_tsv("http://www.boldsystems.org/index.php/API_Public/combined?taxon=Coccinellidae&format=tsv")
 
 #Exporting data to file. (For reproducibility and )
 #write.csv(dfCoccinellidae, "dfCoccinellidae.csv")
@@ -142,7 +142,7 @@ for(i in 1:nrow(dfCoccinellidae)){
     }
             
     #Updating the personal database
-    write.csv(x = continent_library, file = paste("Personal_db_Continents_and_Countries_updated", Sys.Date(), collapse = "", sep = ""), quote = FALSE, row.names = FALSE)
+    write.csv2(x = continent_library, file = paste("Personal_db_Continents_and_Countries_updated", Sys.Date(), collapse = "", sep = ""), quote = FALSE, row.names = FALSE)
   }
 }
 
