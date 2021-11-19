@@ -1,3 +1,7 @@
+#Original file by Melanie Goens
+#Edits by Jacqueline Wu
+#Edits approved by Melanie Goens, Amy Pitura & Raamkumaar Sivakumar
+
 #Intro-to-R-Biodiversity
 
 #Questions of interest: What type of habitat do Coccinellidae thrive the most in? Is there a correlation with most inhabited habitat type and most inhabited world location?
